@@ -1,0 +1,16 @@
+body{ font-family: sans-serif}
+form{display:block;padding:1em; width:22em;border:1px solid #000; }
+fieldset{display:inline; border:none;}
+label{ display:block;}
+label span{ width:100px;display:inline-block;text-align: right;}
+input{margin-left:1em;}
+button{margin-left:1em;}
+legend{font-weight:bold;}
+
+table{border:1px solid black}
+th, td , tr {border-collapse: collapse;}
+th{text-transform: capitalize;background-color:black; color:white; }
+td{    
+    padding: 0.3em 0.5em;
+    margin: 0;
+    border: 1px solid #000; }
