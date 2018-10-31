@@ -1,0 +1,14 @@
+{
+  "name": "bootstrap",
+  "homepage": "https://github.com/avillucas/laboratorio3",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
