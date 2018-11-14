@@ -1,201 +1,156 @@
 
 ///<reference path="mascota.ts"/>
 
+//inicializador 
 $(function () {
-    // localStorage.clear();
+    //cargar los tipos de mascotas
     cargarTipos();
-
+    //mostrar mascotas
     mostrarMascotas();
-
-    $('#cmbFiltro').change(function () {
-        filtrarMascotas(this.value);
+    //filtra los tipos de mascotas
+    $('#cmbFiltro').change(function () {        
+        let tipo = Number($(this).val());
+        filtrarMascotas(tipo);
     });
-
+    //filtra las columnas
     $('#chkId').change(mapearCampos);
     $('#chkName').change(mapearCampos);
     $('#chkEdad').change(mapearCampos);
     $('#chkPatas').change(mapearCampos);    
-
-    //mapearCampos();
-
-
+    mapearCampos();
 });
 
+//Agrega una mascota 
 function agregarMascota(): void {
     let id: number = Number($('#txtId').val());
     let tipo: Clases.tipoMascota = Number($('#selectTipo').val());
     let nuevaMascota = new Clases.Mascota(Number($('#txtId').val()), String($('#txtNombre').val()), Number($('#txtEdad').val()), Number($('#txtPatas').val()), tipo);
-
     let MascotasString: string | null = localStorage.getItem("Mascotas");
-
     let MascotasJSON: JSON[] = MascotasString == null ? [] : JSON.parse(MascotasString);
-
     console.log(nuevaMascota.toJSON());
-
     MascotasJSON.push(JSON.parse(nuevaMascota.toJSON()));
-
     localStorage.setItem("Mascotas", JSON.stringify(MascotasJSON));
-
     alert("Mascota guardada!!!");
-
     mostrarMascotas();
-
     limpiarCampos();
-
-
-
-    //console.log(nuevaMascota.toJSON());
-
+    console.log(nuevaMascota.toJSON());
 }
 
+/**
+ * limpia los campos del formulario
+ */
 function limpiarCampos() {
     $('#txtNombre').val("");
     $('#txtId').val("");
     $('#txtEdad').val("");
     $('#txtPatas').val("");
     $('#selectTipo').val(0);
-
     $('#txtId').focus();
 }
 
+/**
+ * carga la tabla con las mascotas
+ */
 function mostrarMascotas() {
-
     let MascotasString: string | null = localStorage.getItem("Mascotas");
-
     let MascotasJSON: Clases.Mascota[] = MascotasString == null ? [] : JSON.parse(MascotasString);
-
     let tabla: string = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Edad</th><th>Tipo</th><th>Patas</th></tr>";
-
-
-
     for (let i = 0; i < MascotasJSON.length; i++) {
-
         tabla += `<tr><td>${MascotasJSON[i].id}</td><td>${MascotasJSON[i].nombre}</td><td>${MascotasJSON[i].edad}</td><td>${Clases.tipoMascota[MascotasJSON[i].tipo]}</td><td>${MascotasJSON[i].patas}</td></tr>`;
-
     }
-
     tabla += `</table>`;
-
     $('#divTabla').html(tabla);
-
 }
 
-function cargarTipos() {
-    /* var paises = data.map(function(p){
-         return p.pais;
-     })
-     .unique()
-     .sort();
+/*
+ * carga el select de tipos de mascotas
  */
+function cargarTipos() {  
+    /*
     for (let i = 0; i < 5; i++) {
         $("#cmbFiltro").append('<option value="' + i + '">' + Clases.tipoMascota[i] + '</option>');
     }
-
-
-
+*/
     $.each(Clases.tipoMascota, function (value, tipo) {
-        /* $("#cmbFiltro").append('<option value="'+value+'">'+tipo+'</option>');
-             //console.log(x);
-             i++;
-             */
-
+         $("#cmbFiltro").append('<option value="'+value+'">'+tipo+'</option>');
+         console.log(value, tipo);  
     });
 }
 
+/**
+ * Filtra las mascotas a mostrar en la tabla
+ * @param tipo 
+ */
 function filtrarMascotas(tipo: number) {
-    //console.log(tipo);
-
+    console.log(tipo);
     let mascotasFiltradas: Array<Clases.Mascota>;
-
     let MascotasString: string | null = localStorage.getItem("Mascotas");
-
     let MascotasJSON: Clases.Mascota[] = MascotasString == null ? [] : JSON.parse(MascotasString);
-
-    mascotasFiltradas = MascotasJSON.filter(function (mascota: Clases.Mascota) {
-
-        return Clases.tipoMascota[mascota.tipo] === Clases.tipoMascota[tipo];
-
-    }
-
+    mascotasFiltradas = MascotasJSON.filter(
+        function (mascota: Clases.Mascota) {
+            return Clases.tipoMascota[mascota.tipo] === Clases.tipoMascota[tipo];
+        }
     );
-    //console.log(mascotasFiltradas);
+    console.log(mascotasFiltradas);
     mostrarMascotasPorTipo(mascotasFiltradas);
 
 }
 
+/**
+ * limpia el local storage 
+ */
 function cleanStorage() {
     localStorage.clear();
     alert("LocalStorage Limpio");
 }
 
+/**
+ * filtra las mascotas por tipos y escribe la tabla? 
+ * @param lista 
+ */
 function mostrarMascotasPorTipo(lista: Array<Clases.Mascota>) {
-
-
     let tabla: string = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Edad</th><th>Tipo</th><th>Patas</th></tr>";
-
     if (lista.length == 0) {
         tabla += "<tr><td colspan='4'>No hay mascotas que mostrar</td></tr>";
     }
-    else {
-
-
+    else
+    {
         for (let i = 0; i < lista.length; i++) {
-
             tabla += `<tr><td>${lista[i].id}</td><td>${lista[i].nombre}</td><td>${lista[i].edad}</td><td>${Clases.tipoMascota[lista[i].tipo]}</td><td>${lista[i].patas}</td></tr>`;
-
         }
-
     }
-
     tabla += `</table>`;
-
     $('#divTabla').html(tabla);
-
 }
 
+/**
+ * calcula el promedio
+ */
 function calcularPromedio() {
-
     let promedio: number = 0;
     let totalEdades: number;
     let cantidad: number;
-
     let tipo: number = Number($('#cmbFiltro').val());
-
-
-
     let mascotasFiltradas: Array<Clases.Mascota>;
-
     let MascotasString: string | null = localStorage.getItem("Mascotas");
-
     let MascotasJSON: Clases.Mascota[] = MascotasString == null ? [] : JSON.parse(MascotasString);
-
     mascotasFiltradas = MascotasJSON.filter(function (mascota: Clases.Mascota) {
-
         return Clases.tipoMascota[mascota.tipo] === Clases.tipoMascota[tipo];
-
     });
-
-    totalEdades = mascotasFiltradas.reduce(function (anterior, actual) {
+    totalEdades = mascotasFiltradas.reduce(function (anterior:number, actual:Clases.Mascota) {
         return anterior += actual.edad;
-
     }, 0);
-
-
     console.log(totalEdades);
-
     cantidad = mascotasFiltradas.length;
-
-
     console.log(cantidad);
-
     if (cantidad != 0) {
         promedio = totalEdades / cantidad;
     }
-
     $('#txtPromedio').val(promedio);
-
 }
-
+/**
+ * Define que columnas mostrar
+ */
 function mapearCampos() {
 
         let chkId: boolean = (<HTMLInputElement> $('#chkId')[0]).checked;
