@@ -11,6 +11,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+///<reference path="animal.ts"/>
 var Clases;
 (function (Clases) {
     var Mascota = /** @class */ (function (_super) {
@@ -35,7 +36,11 @@ var Clases;
             enumerable: true,
             configurable: true
         });
+        Mascota.prototype.toJSON = function () {
+            var json = "{\"id\":\"" + this._id + "\",\"tipo\":\"" + this._tipo + "\",\"nombre\":\"" + this._nombre + "\", \"edad\":" + this._edad + ",\"patas\":" + this._patas + "}";
+            return json;
+        };
         return Mascota;
-    }(Animal));
+    }(Clases.Animal));
     Clases.Mascota = Mascota;
 })(Clases || (Clases = {}));

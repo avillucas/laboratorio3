@@ -1,3 +1,4 @@
+///<reference path="enumerados.ts"/>
 namespace Clases{
     export abstract class Animal{
         protected _patas:number ;

@@ -17,14 +17,17 @@ $(function () {
     $('#chkPatas').change(mapearCampos);
     mapearCampos();
 });
-//Agrega una mascota 
+//Agrega una mascota  
 function agregarMascota() {
     var id = Number($('#txtId').val());
     var tipo = Number($('#selectTipo').val());
-    var nuevaMascota = new Clases.Mascota(Number($('#txtId').val()), String($('#txtNombre').val()), Number($('#txtEdad').val()), Number($('#txtPatas').val()), tipo);
+    var nombre = String($('#txtNombre').val());
+    var edad = Number($('#txtEdad').val());
+    var patas = Number($('#txtPatas').val());
+    var nuevaMascota = new Clases.Mascota(id, nombre, edad, patas, tipo);
     var MascotasString = localStorage.getItem("Mascotas");
     var MascotasJSON = MascotasString == null ? [] : JSON.parse(MascotasString);
-    console.log(nuevaMascota.toJSON());
+    // console.log(nuevaMascota.toJSON());
     MascotasJSON.push(JSON.parse(nuevaMascota.toJSON()));
     localStorage.setItem("Mascotas", JSON.stringify(MascotasJSON));
     alert("Mascota guardada!!!");
@@ -67,7 +70,7 @@ function cargarTipos() {
 */
     $.each(Clases.tipoMascota, function (value, tipo) {
         $("#cmbFiltro").append('<option value="' + value + '">' + tipo + '</option>');
-        console.log(value, tipo);
+        // console.log(value, tipo);  
     });
 }
 /**
@@ -75,14 +78,14 @@ function cargarTipos() {
  * @param tipo
  */
 function filtrarMascotas(tipo) {
-    console.log(tipo);
+    //console.log(tipo);
     var mascotasFiltradas;
     var MascotasString = localStorage.getItem("Mascotas");
     var MascotasJSON = MascotasString == null ? [] : JSON.parse(MascotasString);
     mascotasFiltradas = MascotasJSON.filter(function (mascota) {
         return Clases.tipoMascota[mascota.tipo] === Clases.tipoMascota[tipo];
     });
-    console.log(mascotasFiltradas);
+    // console.log(mascotasFiltradas);
     mostrarMascotasPorTipo(mascotasFiltradas);
 }
 /**
@@ -90,7 +93,7 @@ function filtrarMascotas(tipo) {
  */
 function cleanStorage() {
     localStorage.clear();
-    alert("LocalStorage Limpio");
+    // alert("LocalStorage Limpio");
 }
 /**
  * filtra las mascotas por tipos y escribe la tabla?
@@ -126,9 +129,9 @@ function calcularPromedio() {
     totalEdades = mascotasFiltradas.reduce(function (anterior, actual) {
         return anterior += actual.edad;
     }, 0);
-    console.log(totalEdades);
+    // console.log(totalEdades);
     cantidad = mascotasFiltradas.length;
-    console.log(cantidad);
+    // console.log(cantidad);
     if (cantidad != 0) {
         promedio = totalEdades / cantidad;
     }

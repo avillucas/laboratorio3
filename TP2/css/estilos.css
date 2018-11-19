@@ -1,0 +1,41 @@
+#spinner{
+    background: url('../images/spinner.gif') 50% transparent no-repeat;
+    display:none;
+    width:15em;
+    height:15em;
+    overflow: hidden;
+}
+
+header h1#logo-superheroes ,header h1#logo-superheroes img
+{
+    width: 100%;   
+}
+header #background-superheroes{ 
+    background: url(../images/Superheroes-shadow-background-image_Grey.jpg) transparent no-repeat center center;
+    height: 381px;
+    background-size: 100%; 
+}
+header .sub-header 
+{
+    background-color: lightcoral;
+}
+header .sub-header button
+{
+    margin: 10px 0;
+}
+footer .row .col-12
+{
+    background-color: lightcoral;
+    padding: 0.2em 0;
+    text-align: center;
+}
+#alta-modal .modal-content
+{
+    background: url(../images/frmBack.jpg) center center no-repeat transparent;
+    background-size: auto;
+}
+#alta-modal .form-blue
+{
+    background-color:rgba(32,16,185,0.65);
+    color:red;
+}

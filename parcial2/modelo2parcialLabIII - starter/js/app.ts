@@ -9,7 +9,7 @@ $(function () {
     mostrarMascotas();
     //filtra los tipos de mascotas
     $('#cmbFiltro').change(function () {        
-        let tipo = Number($(this).val());
+        let tipo = Number($(this).val()); 
         filtrarMascotas(tipo);
     });
     //filtra las columnas
@@ -18,19 +18,23 @@ $(function () {
     $('#chkEdad').change(mapearCampos);
     $('#chkPatas').change(mapearCampos);    
     mapearCampos();
-});
+}); 
 
-//Agrega una mascota 
-function agregarMascota(): void {
+//Agrega una mascota  
+function agregarMascota(): void { 
     let id: number = Number($('#txtId').val());
-    let tipo: Clases.tipoMascota = Number($('#selectTipo').val());
-    let nuevaMascota = new Clases.Mascota(Number($('#txtId').val()), String($('#txtNombre').val()), Number($('#txtEdad').val()), Number($('#txtPatas').val()), tipo);
+    let tipo: Clases.tipoMascota = Number($('#selectTipo').val());   
+    let nombre =  String($('#txtNombre').val());
+    let edad =  Number($('#txtEdad').val());
+    let patas =  Number($('#txtPatas').val());
+    let nuevaMascota = new Clases.Mascota(id,nombre, edad,patas, tipo);
     let MascotasString: string | null = localStorage.getItem("Mascotas");
     let MascotasJSON: JSON[] = MascotasString == null ? [] : JSON.parse(MascotasString);
-    console.log(nuevaMascota.toJSON());
+    
+   // console.log(nuevaMascota.toJSON());
     MascotasJSON.push(JSON.parse(nuevaMascota.toJSON()));
     localStorage.setItem("Mascotas", JSON.stringify(MascotasJSON));
-    alert("Mascota guardada!!!");
+    alert("Mascota guardada!!!");  
     mostrarMascotas();
     limpiarCampos();
     console.log(nuevaMascota.toJSON());
@@ -59,7 +63,7 @@ function mostrarMascotas() {
         tabla += `<tr><td>${MascotasJSON[i].id}</td><td>${MascotasJSON[i].nombre}</td><td>${MascotasJSON[i].edad}</td><td>${Clases.tipoMascota[MascotasJSON[i].tipo]}</td><td>${MascotasJSON[i].patas}</td></tr>`;
     }
     tabla += `</table>`;
-    $('#divTabla').html(tabla);
+    $('#divTabla').html(tabla); 
 }
 
 /*
@@ -73,7 +77,7 @@ function cargarTipos() {
 */
     $.each(Clases.tipoMascota, function (value, tipo) {
          $("#cmbFiltro").append('<option value="'+value+'">'+tipo+'</option>');
-         console.log(value, tipo);  
+        // console.log(value, tipo);  
     });
 }
 
@@ -82,7 +86,7 @@ function cargarTipos() {
  * @param tipo 
  */
 function filtrarMascotas(tipo: number) {
-    console.log(tipo);
+    //console.log(tipo);
     let mascotasFiltradas: Array<Clases.Mascota>;
     let MascotasString: string | null = localStorage.getItem("Mascotas");
     let MascotasJSON: Clases.Mascota[] = MascotasString == null ? [] : JSON.parse(MascotasString);
@@ -91,7 +95,7 @@ function filtrarMascotas(tipo: number) {
             return Clases.tipoMascota[mascota.tipo] === Clases.tipoMascota[tipo];
         }
     );
-    console.log(mascotasFiltradas);
+   // console.log(mascotasFiltradas);
     mostrarMascotasPorTipo(mascotasFiltradas);
 
 }
@@ -101,7 +105,7 @@ function filtrarMascotas(tipo: number) {
  */
 function cleanStorage() {
     localStorage.clear();
-    alert("LocalStorage Limpio");
+   // alert("LocalStorage Limpio");
 }
 
 /**
@@ -140,9 +144,9 @@ function calcularPromedio() {
     totalEdades = mascotasFiltradas.reduce(function (anterior:number, actual:Clases.Mascota) {
         return anterior += actual.edad;
     }, 0);
-    console.log(totalEdades);
+   // console.log(totalEdades);
     cantidad = mascotasFiltradas.length;
-    console.log(cantidad);
+   // console.log(cantidad);
     if (cantidad != 0) {
         promedio = totalEdades / cantidad;
     }
@@ -198,5 +202,5 @@ function mapearCampos() {
     
         $('#divTabla').html(tabla);
     
-    }
+}
     
