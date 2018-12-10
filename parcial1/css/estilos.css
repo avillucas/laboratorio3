@@ -1,0 +1,162 @@
+
+body
+{
+    background-color:lightblue;
+    margin: 0;
+    padding: 0;
+}
+section, header, footer
+{
+    display:block;
+    width:1024px;
+    margin:0 auto;
+}
+.header
+{
+    width: 100%;
+    background: url(../images/Superheroes-shadow-background-image_Grey.jpg) transparent;
+    background-size: 100%;
+    height: 339px;
+    position: relative;
+}
+.header img
+{
+    width: 283px;
+    position: absolute;
+    left: 49px;
+    top: 30px;    
+}
+.red-line
+{
+    background-color: lightcoral;
+    padding:10px 0;
+}
+.red-line button
+{
+    background-color: lightgreen;
+    border-radius: 6px;
+    color: black;
+    padding: 4px 6px;
+    margin: 0 10px;
+}
+footer
+{
+    background-color: lightcoral;
+    padding:10px 0;
+    text-align: center;
+}
+
+table
+{
+    margin:0 auto;
+    display:table;
+    text-align: center;
+}
+table tr
+{
+    width:100%;
+    display:table-row;
+    
+}
+table td , table th
+{
+    padding:10px 20px;  
+    border-collapse: collapse;
+}
+table thead tr
+{
+    background-color: blue;
+}
+table tbody tr
+{
+    background-color: lightcoral;
+}
+
+#listSection
+{
+    padding:20px 0 ;
+    min-height: 400px;
+}
+
+
+#spinner {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);     
+    display:none;
+    margin: 0;
+    padding: 0;
+    z-index:100;
+}
+
+#spinner img
+{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+#agregarForm
+{
+    background-color: rgba(0,0,255,0.8);
+    width: 300px;
+    float: right;
+    padding: 30px 15px;
+    margin: 45px 50px;
+}
+
+#agregarForm label
+{
+  display:block;
+}
+
+#agregarForm label span
+{
+    display: inline-block;
+    width: 100px;
+    color: red;
+}
+
+#agregarForm fieldset
+{
+    border:none;
+    display:inline;
+}
+
+#agregarForm fieldset label 
+{
+    display:inline;
+    margin:0 10px;
+}
+#agregarForm fieldset label  span
+{
+    display:inline;
+}
+
+.modal 
+{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    
+}
+
+/* Modal Content/Box */
+.modal-content 
+{
+    background: url(../images/frmBack.jpg) transparent;
+    border-radius: 20px;
+    display: block;
+    margin: 7% auto;
+    width: 676px;
+    overflow: hidden;
+}
+
+
+

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/estilos.css">
+    <script src="./scripts/jquery.js"></script>
+    <script src="./scripts/modelo.js"></script>
+    <script src="./scripts/vista.js"></script>
+    <script src="./scripts/controlador.js"></script>
+    <script src="./scripts/index.js"></script>   
+    <title>ABM SuperHeroes</title>
+</head>
+
+<body>
+    <div id="spinner">
+        <img src="images/spinner.gif" />
+    </div>
+    <header>
+        <div class="header">
+            <img src="./images/logoSuperHeroes.png" alt="logo superheroes" id="logo">
+        </div>
+        <div class="red-line">
+            <button id="btnAlta">Agregar</button>
+        </div>
+    </header>    
+    <section id="agregarSection" class="modal">
+        <div class="modal-content">
+           
+            <form id="agregarForm" onSubmit="return false">            
+                <label for="idField">
+                    <span>Id</span>
+                    <input type="text" id="idField" value="1" />                
+                </label>            
+                <label for="nombreField">
+                    <span>Nombre</span>
+                    <input type="text" id="nombreField" value="Test" />                
+                </label>
+                <label for="apellidoField">
+                    <span>Apellido</span>
+                    <input type="text" id="apellidoField" value="Test" />
+                </label>
+                <label for="aliasField">
+                    <span>Alias</span>
+                    <input type="text" id="aliasField" value="Test" />
+                </label>
+                <label for="edadField">
+                    <span>Edad</span>
+                    <input type="text" min="1" id="edadField" value="Test" />
+                </label>
+                <fieldset>
+                  <label for="ladoField">
+                       <input type="radio" value="heroe" name="ladoField" checked="checked" />
+                       <span> Heroe</span>
+                  </label>
+                  <label for="ladoField">
+                       <input type="radio" value="villano" name="ladoField"/>
+                       <span> Villano</span>
+                  </label>              
+                </fieldset>
+                <div class="botones">
+                    <button id="btnAltaForm">Dar de Alta</button>
+                    <button id="btnModificarForm">Modificar</button>              
+                    <button id="btnEliminarForm">Eliminar</button>              
+                    <button id="btnAltaCerrar">Cancelar</button>                              
+                </div>
+            </form> 
+        </div>
+    </section>
+    <section id="listSection">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>                    
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Alias</th>
+                    <th>Edad</th>
+                    <th>Lado</th>                    
+                </tr>
+            </thead>
+            <tbody id="listTable">                
+                 
+            </tbody>
+        </table>        
+    </section>
+    <footer>
+        @copyrigth 2018 UTN
+    </footer>
+</body>
+
+</html>
